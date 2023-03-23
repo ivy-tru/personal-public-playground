@@ -17,6 +17,8 @@ jobs:
       run: echo "Hello ${{ github.event.inputs.message }}" >>log.txt
     - name: Commit
       run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"      
         git add -A
         git commit -am "Automated commit by add-log-entry workflow."
         git push
