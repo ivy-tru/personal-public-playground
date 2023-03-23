@@ -1,0 +1,22 @@
+name: Add repo log entry
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Set log entry text'
+        default: 'test 1234 text'
+        required: true
+
+jobs:
+  addentry:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: add context to file
+      run: echo "Hello ${{ github.event.inputs.message }}" >>log.txt
+    - name: Commit
+      run: |
+        git add -A
+        git commit -am "Automated commit by add-log-entry workflow."
+        git push
